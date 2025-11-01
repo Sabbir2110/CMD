@@ -6,51 +6,62 @@ b) Find out which vowels and consonants are existed in the above string?
 c) Divide the given string into two separate strings, where one string only contains 
  the words started with vowel, and another contains the words started with consonant.
 */
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-bool is_vowel(char c) {
-    return tolower(c)=='a'||tolower(c)=='e'||tolower(c)=='i'||tolower(c)=='o'||tolower(c)=='u';
+bool isVowel(char ch) {
+    ch = tolower(ch);
+    return (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u');
 }
 
 int main() {
-    freopen("02.input.txt", "r", stdin);
-    string input;
-    getline(cin, input);
+    string str = "Munmun is the student of Computer Science & Engineering";
 
-    int vowel = 0, consonant = 0;
-    string vowels, consonants, word;
-    string vowel_words, consonant_words;
+    int vowelCount = 0, consonantCount = 0;
+    set<char> vowelsFound, consonantsFound;
 
-    for(char c : input) {
-        if(is_vowel(c)) {
-            vowel++; vowels += c;
-        }
-        else if(tolower(c) >= 'a' && tolower(c) <= 'z') {
-            consonant++; consonants += c;
-        }
-        if(tolower(c) >= 'a' && tolower(c) <= 'z') {
-            word += c;
-        }
-        else if(c == ' ') {
-            // words are checked if they started with vowel
-            if(is_vowel(word[0])) vowel_words += " " + word;
-            else consonant_words += " " + word;
-            word = "";
+    // Count vowels and consonants
+    for (char ch : str) {
+        if (isalpha(ch)) {
+            if (isVowel(ch)) {
+                vowelCount++;
+                vowelsFound.insert(tolower(ch));
+            } else {
+                consonantCount++;
+                consonantsFound.insert(tolower(ch));
+            }
         }
     }
-    // Also check the last word after which there is no space
-    if(is_vowel(word[0])) vowel_words += " " + word;
-    else consonant_words += " " + word;
-    word = "";
 
+    // Divide words based on starting letter
+    string vowelWords = "", consonantWords = "";
+    stringstream ss(str);
+    string word;
+    while (ss >> word) {
+        char first = tolower(word[0]);
+        if (isalpha(first)) {
+            if (isVowel(first))
+                vowelWords += word + " ";
+            else
+                consonantWords += word + " ";
+        }
+    }
 
-    cout<<"\nNumber of vowels: "<<vowel<<endl;
-    cout<<"The vowels are: "<<vowels<<endl;
-    cout<<"Number of consonants: "<<consonant<<endl;
-    cout<<"The consonants are: "<<consonants<<endl;
-    cout<<"Words started with vowel: "<<vowel_words<<endl;
-    cout<<"Words started with consonant: "<<consonant_words;
-    
+    // Output results
+    cout << "Original String: " << str << "\n\n";
+    cout << "Total Vowels: " << vowelCount << endl;
+    cout << "Total Consonants: " << consonantCount << endl;
+
+    cout << "\nVowels Present: ";
+    for (char v : vowelsFound) cout << v << " ";
+    cout << endl;
+
+    cout << "Consonants Present: ";
+    for (char c : consonantsFound) cout << c << " ";
+    cout << endl;
+
+    cout << "\nWords starting with Vowel: " << vowelWords << endl;
+    cout << "Words starting with Consonant: " << consonantWords << endl;
+
     return 0;
 }
