@@ -1,6 +1,7 @@
 # Compiler Design Lab 
-    Name:Abdullah Numan Shakil
+    Name:Sabbir Ahmed
     Department of Computer Science & Engineering
     University of Rajshahi
 
-## [Lab Manual](https://github.com/Shakil-RU/Compiler-Design-Lab/blob/main/Lab_Manual.pdf)
+## [Lab Manual]([https://github.com/Sabbir2110/CMD/blob/main/Lab_Manual.pdf])
+
